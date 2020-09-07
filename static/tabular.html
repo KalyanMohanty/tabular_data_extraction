@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tabular</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+<body>
+<img src="/static/dark background.jpeg" alt="background" width="500" height="600">
+<div class="button-container" style="display: flex;">
+    <form id="upload-form" action="{{ url_for('tabular') }}" method="POST" enctype="multipart/form-data">
+        <strong>Files:</strong><br>
+        <input id="file-picker1" type="file" name="file" accept="image/*" multiple>
+
+        <div id="msg"></div>
+        <input type="submit" value="Upload Image!" id="upload-button">
+    </form>
+    <form id="upload-form-2" action="{{ url_for('tabularpdf') }}" method="POST" enctype="multipart/form-data">
+        <strong>Files:</strong><br>
+        <input id="file-picker2" type="file" name="file" accept="application/pdf/*" multiple>
+        <div id="msg2"></div>
+        <input type="submit" value="Upload Pdf!" id="upload-button-2">
+    </form>
+
+</div>
+</body>
+<script>
+
+    $("#file-picker1").change(function(){
+
+        var input = document.getElementById('file-picker');
+
+        for (var i=0; i<input.files.length; i++)
+        {
+            var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase()
+
+            if ((ext == 'jpg') || (ext == 'png')|| (ext == 'jpeg'))
+            {
+                $("#msg").text("Files are supported")
+            }
+            else
+            {
+                $("#msg").text("Files are NOT supported")
+                document.getElementById("file-picker").value ="";
+            }
+
+        }
+
+
+    } );
+
+</script>
+<script>
+
+    $("#file-picker2").change(function(){
+
+        var input = document.getElementById('file-picker');
+
+        for (var i=0; i<input.files.length; i++)
+        {
+            var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase()
+
+            if (ext=='pdf')
+            {
+                $("#msg").text("Files are supported")
+            }
+            else
+            {
+                $("#msg").text("Files are NOT supported")
+                document.getElementById("file-picker").value ="";
+            }
+
+        }
+
+
+    } );
+
+</script>
+</html>
+
+
+
+
+
+
+
+
